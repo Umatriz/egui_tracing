@@ -121,7 +121,11 @@ impl Widget for Logs {
                 TableCell::default()
                     .common_props(CommonProps::default().min_width(120.0))
                     .children(|ui| {
-                        let message = event.fields.get("message").unwrap();
+                        let message = event
+                            .fields
+                            .get("message")
+                            .map(|m| m.as_str())
+                            .unwrap_or("");
 
                         ui.style_mut().visuals.override_text_color = Some(Color32::WHITE);
                         ui.add(Label::new(message).wrap(false))
