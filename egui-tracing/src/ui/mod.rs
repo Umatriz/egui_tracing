@@ -4,7 +4,7 @@ mod state;
 
 use std::sync::{Arc, Mutex};
 
-use egui::{Color32, Label, Response, TextStyle, Widget};
+use egui::{Color32, Label, Response, TextStyle, TextWrapMode, Widget};
 use globset::GlobSetBuilder;
 
 use self::color::ToColor32;
@@ -128,7 +128,7 @@ impl Widget for Logs {
                             .unwrap_or("");
 
                         ui.style_mut().visuals.override_text_color = Some(Color32::WHITE);
-                        ui.add(Label::new(message).wrap(false))
+                        ui.add(Label::new(message).wrap_mode(TextWrapMode::Extend))
                             .on_hover_text(message);
                     })
                     .show(ui);
